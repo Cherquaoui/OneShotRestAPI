@@ -1,16 +1,13 @@
 package sbi.oneshot.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.hateoas.ExposesResourceFor;
 import org.springframework.hateoas.ResourceSupport;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Date;
+
 
 @Entity
 @Embeddable
