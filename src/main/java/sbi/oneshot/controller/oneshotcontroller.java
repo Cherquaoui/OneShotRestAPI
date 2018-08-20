@@ -11,8 +11,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
-
 
 
 @RestController
@@ -37,23 +35,11 @@ public class oneshotcontroller {
         return goRepository.findAll();
     }
 
-    @RequestMapping(value = "/go/{codeSite}",produces = {"application/hal+json"})
-    public Go getGo(@PathVariable String codeSite){
-
-        Go go;
-        go=goRepository.getOne(codeSite);
-        go.add((linkTo(methodOn(oneshotcontroller.class).getGo(codeSite)).withSelfRel()));
-        go.add((linkTo(methodOn(oneshotcontroller.class).editGo(codeSite,go)).withRel("edit")));
-        go.add(linkTo(methodOn(oneshotcontroller.class).getElec(codeSite)).withRel("elec"));
-
-        go.add(linkTo(methodOn(oneshotcontroller.class).getAllElec()).withRel("electrification"));
-
-        return go  ;
-    }
 
 
     @PutMapping("/go/{codeSite}")
     public Go editGo(@PathVariable String codeSite, @RequestBody Go go){
+
 
         return goRepository.save(go);
 
@@ -61,6 +47,10 @@ public class oneshotcontroller {
 
     @RequestMapping(value = "/go",method = RequestMethod.POST)
     public Go saveGo(@RequestBody Go go){
+        if((goRepository.findById(go.getCodeSite()))!=null){
+            return null;
+        }
+
         return this.goRepository.save(go);
     }
 
@@ -87,6 +77,10 @@ public class oneshotcontroller {
     @GetMapping("/elec/{codeSite}")
     public ElecSuivi getElec(@PathVariable String codeSite){
         return elecSuiviRepository.getOne(codeSite);
+    }
+    @GetMapping("/go/{codeSite}")
+    public Go getGo(@PathVariable String codeSite){
+        return goRepository.getOne(codeSite);
     }
 
 
