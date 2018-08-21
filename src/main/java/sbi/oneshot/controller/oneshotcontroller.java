@@ -29,6 +29,10 @@ public class oneshotcontroller {
     @Autowired
     private OneShotRepository oneShotRepository;
 
+    Go go1 = new Go();
+
+
+
 
     @RequestMapping("/go")
     public List<Go> getAllGo(){
@@ -46,12 +50,17 @@ public class oneshotcontroller {
     }
 
     @RequestMapping(value = "/go",method = RequestMethod.POST)
-    public Go saveGo(@RequestBody Go go){
-        if((goRepository.findById(go.getCodeSite()))!=null){
+    public Optional<Go> saveGo(@RequestBody Optional<Go> go){
+
+            Optional<Go> monGo = goRepository.findById(go.get().getCodeSite());
+            if(!monGo.isPresent()){
+
             return null;
         }
 
-        return this.goRepository.save(go);
+
+
+        return go;
     }
 
     @RequestMapping("/oneshot")
