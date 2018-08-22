@@ -54,13 +54,10 @@ public class oneshotcontroller {
 
             Optional<Go> monGo = goRepository.findById(go.get().getCodeSite());
             if(!monGo.isPresent()){
-
-            return null;
+                goRepository.save(go.get());
+            return go;
         }
-
-
-
-        return go;
+        return null;
     }
 
     @RequestMapping("/oneshot")
@@ -71,6 +68,10 @@ public class oneshotcontroller {
     @RequestMapping("/cw")
     public List<Cw> getAllCw(){
         return cwRepository.findAll();
+    }
+
+    @GetMapping("/cw/{codeSite}")
+    public Cw getCw(@PathVariable String codeSite){ return cwRepository.getOne(codeSite);
     }
 
     @RequestMapping("/elec")
