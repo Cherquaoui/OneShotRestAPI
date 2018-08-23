@@ -20,8 +20,7 @@ public class oneshotcontroller {
 
     @Autowired
     private GoRepository goRepository;
-    @Autowired
-    private CwRepository cwRepository;
+
     @Autowired
     private ElecSuiviRepository elecSuiviRepository;
     @Autowired
@@ -29,70 +28,55 @@ public class oneshotcontroller {
     @Autowired
     private OneShotRepository oneShotRepository;
 
-    Go go1 = new Go();
-
-
-
 
     @RequestMapping("/go")
-    public List<Go> getAllGo(){
+    public List<Go> getAllGo() {
         return goRepository.findAll();
     }
 
 
-
     @PutMapping("/go/{codeSite}")
-    public Go editGo(@PathVariable String codeSite, @RequestBody Go go){
-
-
+    public Go editGo(@PathVariable String codeSite, @RequestBody Go go) {
         return goRepository.save(go);
 
     }
 
-    @RequestMapping(value = "/go",method = RequestMethod.POST)
-    public Optional<Go> saveGo(@RequestBody Optional<Go> go){
+    @RequestMapping(value = "/go", method = RequestMethod.POST)
+    public Optional<Go> saveGo(@RequestBody Optional<Go> go) {
 
-            Optional<Go> monGo = goRepository.findById(go.get().getCodeSite());
-            if(!monGo.isPresent()){
-                goRepository.save(go.get());
+        Optional<Go> monGo = goRepository.findById(go.get().getCodeSite());
+        if (!monGo.isPresent()) {
+            goRepository.save(go.get());
             return go;
         }
         return null;
     }
 
     @RequestMapping("/oneshot")
-    public List<OneShot> getAllOneShot(){
+    public List<OneShot> getAllOneShot() {
         return oneShotRepository.findAll();
     }
 
-    @RequestMapping("/cw")
-    public List<Cw> getAllCw(){
-        return cwRepository.findAll();
-    }
-
-    @GetMapping("/cw/{codeSite}")
-    public Cw getCw(@PathVariable String codeSite){ return cwRepository.getOne(codeSite);
-    }
 
     @RequestMapping("/elec")
-    public List<ElecSuivi> getAllElec(){
+    public List<ElecSuivi> getAllElec() {
         return elecSuiviRepository.findAll();
     }
 
     @RequestMapping("/elec/trav")
-    public List<ElecTrav> getAllTrav(){
+    public List<ElecTrav> getAllTrav() {
         return elecTravRepository.findAll();
     }
 
     @GetMapping("/elec/{codeSite}")
-    public ElecSuivi getElec(@PathVariable String codeSite){
+    public ElecSuivi getElec(@PathVariable String codeSite) {
         return elecSuiviRepository.getOne(codeSite);
     }
+
     @GetMapping("/go/{codeSite}")
-    public Go getGo(@PathVariable String codeSite){
+    public Go getGo(@PathVariable String codeSite) {
         return goRepository.getOne(codeSite);
     }
-
 
 
 }
