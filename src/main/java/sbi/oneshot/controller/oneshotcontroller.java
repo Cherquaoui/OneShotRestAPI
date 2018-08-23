@@ -22,8 +22,6 @@ public class oneshotcontroller {
     private GoRepository goRepository;
 
     @Autowired
-    private ElecSuiviRepository elecSuiviRepository;
-    @Autowired
     private ElecTravRepository elecTravRepository;
     @Autowired
     private OneShotRepository oneShotRepository;
@@ -58,20 +56,11 @@ public class oneshotcontroller {
     }
 
 
-    @RequestMapping("/elec")
-    public List<ElecSuivi> getAllElec() {
-        return elecSuiviRepository.findAll();
-    }
-
     @RequestMapping("/elec/trav")
     public List<ElecTrav> getAllTrav() {
         return elecTravRepository.findAll();
     }
 
-    @GetMapping("/elec/{codeSite}")
-    public ElecSuivi getElec(@PathVariable String codeSite) {
-        return elecSuiviRepository.getOne(codeSite);
-    }
 
     @GetMapping("/go/{codeSite}")
     public Go getGo(@PathVariable String codeSite) {
