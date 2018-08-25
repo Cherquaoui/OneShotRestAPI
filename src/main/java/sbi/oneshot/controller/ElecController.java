@@ -19,26 +19,29 @@ public class ElecController {
 
     @Autowired
     ElecTravRepository elecTravRepository;
+
     @RequestMapping("/elec")
-    public List<ElecSuivi> getAllElec(){
+    public List<ElecSuivi> getAllElec() {
         return elecSuiviRepository.findAll();
     }
 
     @GetMapping("/elec/{codeSite}")
-    public ElecSuivi getElecSuivi(@PathVariable String codeSite){ return elecSuiviRepository.getOne(codeSite);
+    public ElecSuivi getElecSuivi(@PathVariable String codeSite) {
+        return elecSuiviRepository.getOne(codeSite);
     }
 
     @PutMapping("/elec/{codeSite}")
-    public ElecSuivi updateElecSuivi(@PathVariable String codeSite,@RequestBody ElecSuivi elec){
+    public ElecSuivi updateElecSuivi(@PathVariable String codeSite, @RequestBody ElecSuivi elec) {
         return this.elecSuiviRepository.save(elec);
     }
 
     @GetMapping("/elec/trav/{codeSite}")
-    public ElecTrav getElecTrav(@PathVariable String codeSite){
+    public ElecTrav getElecTrav(@PathVariable String codeSite) {
         return this.elecTravRepository.getOne(codeSite);
     }
+
     @PutMapping("/elec/trav/{codeSite}")
-    public ElecTrav putElecTrav(@RequestBody ElecTrav elecTrav){
+    public ElecTrav putElecTrav(@RequestBody ElecTrav elecTrav) {
         return this.elecTravRepository.save(elecTrav);
     }
 }

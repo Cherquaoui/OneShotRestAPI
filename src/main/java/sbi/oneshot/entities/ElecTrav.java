@@ -19,5 +19,6 @@ public class ElecTrav {
   private Integer btS;
   private Integer btSRf;
   private Integer btNiche;
+  private String equipeElec;
   private Integer ok;
 }
