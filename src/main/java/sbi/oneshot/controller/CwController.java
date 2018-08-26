@@ -15,16 +15,17 @@ public class CwController {
     CwRepository cwRepository;
 
     @RequestMapping("/cw")
-    public List<Cw> getAllCw(){
+    public List<Cw> getAllCw() {
         return cwRepository.findAll();
     }
 
     @GetMapping("/cw/{codeSite}")
-    public Cw getCw(@PathVariable String codeSite){ return cwRepository.getOne(codeSite);
+    public Cw getCw(@PathVariable String codeSite) {
+        return cwRepository.getOne(codeSite);
     }
 
     @PutMapping("/cw/{codeSite}")
-    public Cw updateCw(@RequestBody Cw cw){
+    public Cw updateCw(@RequestBody Cw cw) {
         return this.cwRepository.save(cw);
     }
 }
