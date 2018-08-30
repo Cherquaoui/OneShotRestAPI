@@ -11,7 +11,6 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class ElecSuivi {
-
   @Id
   private String codeSite;
   private String regie;
@@ -28,7 +27,4 @@ public class ElecSuivi {
   private java.sql.Date reception;
   private java.sql.Date abonnement;
   private java.sql.Date poseCompteur;
-
-
-
 }
