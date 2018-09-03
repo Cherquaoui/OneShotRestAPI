@@ -8,7 +8,7 @@ spring.jpa.generate-ddl=true
 spring.jpa.hibernate.ddl-auto=none
 
 
-spring.datasource.url='jdbc:mysql://localhost:3306/oneshot'
+spring.datasource.url=jdbc:mysql://localhost:3306/oneshot
 spring.datasource.username=root
 spring.datasource.password=0000
 spring.jpa.show-sql=true

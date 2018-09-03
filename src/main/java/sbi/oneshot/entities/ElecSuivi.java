@@ -29,6 +29,10 @@ public class ElecSuivi {
   private java.sql.Date abonnement;
   private java.sql.Date poseCompteur;
 
+  public ElecSuivi(String codeSite){
+    this.codeSite=codeSite;
+  }
+
 
 
 }

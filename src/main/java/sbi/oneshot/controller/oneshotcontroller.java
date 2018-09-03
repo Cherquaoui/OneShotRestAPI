@@ -26,6 +26,12 @@ public class oneshotcontroller {
     @Autowired
     private OneShotRepository oneShotRepository;
 
+    @Autowired
+    private ElecSuiviRepository elecSuiviRepository;
+
+    @Autowired
+    private CwRepository cwRepository;
+
 
     @RequestMapping("/go")
     public List<Go> getAllGo() {
@@ -45,8 +51,13 @@ public class oneshotcontroller {
         Optional<Go> monGo = goRepository.findById(go.get().getCodeSite());
         if (!monGo.isPresent()) {
             goRepository.save(go.get());
+            cwRepository.save(new Cw(go.get().getCodeSite()));
+            elecSuiviRepository.save(new ElecSuivi(go.get().getCodeSite()));
+            elecTravRepository.save(new ElecTrav(go.get().getCodeSite()));
+
             return go;
         }
+
         return null;
     }
 

@@ -26,6 +26,10 @@ public class Cw {
   private java.sql.Date blocage;
   private java.sql.Date deblocage;
 
+  public Cw(String codeSite){
+    this.codeSite=codeSite;
+  }
+
 
 
 

@@ -21,4 +21,8 @@ public class ElecTrav {
   private Integer btNiche;
   private String equipeElec;
   private Integer ok;
+
+  public ElecTrav(String codeSite){
+    this.codeSite=codeSite;
+  }
 }
