@@ -1,16 +1,16 @@
 package sbi.oneshot.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import sbi.oneshot.entities.*;
 import sbi.oneshot.entities.composition.OneShot;
 import sbi.oneshot.repositories.*;
 import sbi.oneshot.repositories.composition.OneShotRepository;
+import sbi.oneshot.service.AjouterGo;
 
 import java.util.List;
 import java.util.Optional;
-
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
 
 @RestController
@@ -26,11 +26,9 @@ public class oneshotcontroller {
     @Autowired
     private OneShotRepository oneShotRepository;
 
-    @Autowired
-    private ElecSuiviRepository elecSuiviRepository;
 
     @Autowired
-    private CwRepository cwRepository;
+    private AjouterGo ajouterGo;
 
 
     @RequestMapping("/go")
@@ -46,20 +44,19 @@ public class oneshotcontroller {
     }
 
     @RequestMapping(value = "/go", method = RequestMethod.POST)
+
     public Optional<Go> saveGo(@RequestBody Optional<Go> go) {
 
         Optional<Go> monGo = goRepository.findById(go.get().getCodeSite());
         if (!monGo.isPresent()) {
-            goRepository.save(go.get());
-            cwRepository.save(new Cw(go.get().getCodeSite()));
-            elecSuiviRepository.save(new ElecSuivi(go.get().getCodeSite()));
-            elecTravRepository.save(new ElecTrav(go.get().getCodeSite()));
+            ajouterGo.saveGo(go.get());
 
             return go;
         }
 
         return null;
     }
+
 
     @RequestMapping("/oneshot")
     public List<OneShot> getAllOneShot() {

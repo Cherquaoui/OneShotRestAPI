@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Getter @Setter
 @NoArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Go extends ResourceSupport implements Serializable {
+public class Go implements Serializable {
 
   @Id
   private String codeSite;
@@ -25,6 +25,10 @@ public class Go extends ResourceSupport implements Serializable {
   private String region;
   private String typologie;
   private Long hauteur;
+
+  public Go(String codeSite){
+    this.codeSite=codeSite;
+  }
 
 
 
