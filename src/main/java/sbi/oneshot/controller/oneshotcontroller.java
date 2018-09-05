@@ -33,8 +33,9 @@ public class oneshotcontroller {
 
 
     @GetMapping("/go")
-    public Page<Go> getAllGo(@RequestParam(defaultValue = "0") int page) {
-        return goRepository.findAll(PageRequest.of(page,10));
+    public Page<Go> getAllGo(@RequestParam(defaultValue = "0", name = "index") int index,
+                             @RequestParam(defaultValue = "10",name = "size") int size) {
+        return goRepository.findAll(PageRequest.of(index,size));
     }
 
 
