@@ -3,7 +3,6 @@ package sbi.oneshot.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import sbi.oneshot.entities.*;
 import sbi.oneshot.entities.composition.OneShot;
@@ -34,8 +33,8 @@ public class oneshotcontroller {
 
 
     @GetMapping("/go")
-    public Page<Go> getAllGo(@RequestParam(defaultValue = "10") int page) {
-        return goRepository.findAll(PageRequest.of(0,10));
+    public Page<Go> getAllGo(@RequestParam(defaultValue = "0") int page) {
+        return goRepository.findAll(PageRequest.of(page,10));
     }
 
 
@@ -61,8 +60,9 @@ public class oneshotcontroller {
 
 
     @RequestMapping("/oneshot")
-    public List<OneShot> getAllOneShot() {
-        return oneShotRepository.findAll();
+    public Page<OneShot> getAllOneShot(@RequestParam(name = "page",defaultValue = "0") int page,
+                                       @RequestParam(name = "size",defaultValue = "10") int size) {
+        return oneShotRepository.findAll(PageRequest.of(page,size));
     }
 
 
