@@ -44,4 +44,9 @@ public class ElecController {
     public ElecTrav putElecTrav(@RequestBody ElecTrav elecTrav) {
         return this.elecTravRepository.save(elecTrav);
     }
+
+    @RequestMapping("/elec/trav")
+    public List<ElecTrav> getAllTrav() {
+        return elecTravRepository.findAll();
+    }
 }

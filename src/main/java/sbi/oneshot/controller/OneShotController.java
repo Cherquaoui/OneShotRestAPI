@@ -102,10 +102,6 @@ public class OneShotController {
     }
 
 
-    @RequestMapping("/elec/trav")
-    public List<ElecTrav> getAllTrav() {
-        return elecTravRepository.findAll();
-    }
 
 
     @GetMapping("/go/{codeSite}")
