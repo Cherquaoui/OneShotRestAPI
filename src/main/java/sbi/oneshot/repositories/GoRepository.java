@@ -21,6 +21,11 @@ public interface GoRepository extends JpaRepository<Go, String> {
             @Param("typologie") String typologie,
             @Param("region") String region, Pageable pageable);
 
-    @Query("SELECT go.codeSite from Go go where go.codeSite like %:code%")
-    String[] rechercherGo(@Param("code") String code);
+    @Query("SELECT go.codeSite from Go go where go.codeSite like %:codeSite% " +
+            "and go.region like %:region% " +
+            "and go.typologie like %:typologie%")
+    String[] rechercherGo(@Param("codeSite") String codeSite,
+                          @Param("region") String region,
+                          @Param("typologie") String typologie)
+                         ;
 }

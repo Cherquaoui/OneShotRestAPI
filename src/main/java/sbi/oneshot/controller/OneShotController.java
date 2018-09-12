@@ -11,9 +11,12 @@ import sbi.oneshot.repositories.*;
 import sbi.oneshot.repositories.composition.OneShotRepository;
 import sbi.oneshot.service.AjouterGo;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
@@ -21,7 +24,7 @@ import static java.util.stream.Collectors.toList;
 
 @RestController
 @CrossOrigin("*")
-public class oneshotcontroller {
+public class OneShotController {
 
 
     @Autowired
@@ -31,6 +34,9 @@ public class oneshotcontroller {
     private ElecTravRepository elecTravRepository;
     @Autowired
     private OneShotRepository oneShotRepository;
+
+    @Autowired
+    private EquipeRepository equipeRepository;
 
 
     @Autowired
@@ -44,18 +50,20 @@ public class oneshotcontroller {
     }
 
     @GetMapping("/codesite")
-    public String[] rechercherGo(@RequestParam(name = "code", defaultValue = "") String site) {
-        return goRepository.rechercherGo(site);
+    public String[] rechercherGo(@RequestParam(name = "codeSite", defaultValue = "") String codeSite,
+                                 @RequestParam(name = "region", defaultValue = "") String region,
+                                 @RequestParam(name = "typologie", defaultValue = "") String typologie) {
+        return goRepository.rechercherGo(codeSite, region, typologie);
     }
 
     @GetMapping("/go/recherche")
     public Page<Go> rechercheGo(@RequestParam(name = "codeSite", defaultValue = "") String mc,
                                 @RequestParam(name = "size", defaultValue = "10") int size,
-                                @RequestParam(name = "index", defaultValue = "0") int index,
+                                @RequestParam(name = "page", defaultValue = "0") int page,
                                 @RequestParam(name = "region", defaultValue = "") String region,
                                 @RequestParam(name = "typologie", defaultValue = "") String typologie) {
 
-        return goRepository.rechercher(mc, typologie, region, PageRequest.of(index, size));
+        return goRepository.rechercher(mc, typologie, region, PageRequest.of(page, size));
 
     }
 
@@ -66,7 +74,7 @@ public class oneshotcontroller {
 
     }
 
-    @RequestMapping(value = "/go", method = RequestMethod.POST)
+    @PostMapping(value = "/go")
 
     public Optional<Go> saveGo(@RequestBody Optional<Go> go) {
 
@@ -83,25 +91,14 @@ public class oneshotcontroller {
 
     @RequestMapping("/oneshot")
     public Page<OneShot> rechercheOneShot(@RequestParam(name = "page", defaultValue = "0") int page,
-                                                   @RequestParam(name = "size", defaultValue = "10") int size,
-                                                   @RequestParam(name = "codeSite", defaultValue = "") String codeSite,
-                                                   @RequestParam(name = "etatCw",defaultValue = "") String etatCw
-                                     ) {
-        List<OneShot> filtrage = oneShotRepository.
-                rechercheOneShot(codeSite,etatCw)
-                .stream().filter(new Predicate<OneShot>() {
-            @Override
-            public boolean test(OneShot oneShot) {
-                System.out.println(oneShot.getCodeSite());
-                return oneShot.getCw().getCodeSite().contains("AS");
-            }
-        }).collect(toList());
+                                          @RequestParam(name = "size", defaultValue = "10") int size,
+                                          @RequestParam(name = "codeSite", defaultValue = "") String codeSite,
+                                          @RequestParam(name = "region", defaultValue = "") String region,
+                                          @RequestParam(name = "typologie", defaultValue = "") String typologie,
+                                          @RequestParam(name = "etatCw", defaultValue = "") String etatCw
+    ) {
 
-        filtrage.forEach(name-> System.out.println("habiiiiiib"+name.getCodeSite()));
-        Page<OneShot> mapage = new PageImpl<>(filtrage, PageRequest.of(page, 10),filtrage.size());
-
-
-        return mapage;
+        return oneShotRepository.rechercheOneShot(codeSite,region,typologie,etatCw,PageRequest.of(page,size));
     }
 
 
@@ -114,6 +111,11 @@ public class oneshotcontroller {
     @GetMapping("/go/{codeSite}")
     public Go getGo(@PathVariable String codeSite) {
         return goRepository.getOne(codeSite);
+    }
+
+    @GetMapping("/equipe")
+    public List<Equipe> getEquipe(){
+        return equipeRepository.findAll();
     }
 
 
