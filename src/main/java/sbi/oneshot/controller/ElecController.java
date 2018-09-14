@@ -5,8 +5,10 @@ import org.springframework.web.bind.annotation.*;
 
 import sbi.oneshot.entities.ElecSuivi;
 import sbi.oneshot.entities.ElecTrav;
+import sbi.oneshot.entities.composition.Electrification;
 import sbi.oneshot.repositories.ElecSuiviRepository;
 import sbi.oneshot.repositories.ElecTravRepository;
+import sbi.oneshot.repositories.composition.ElectrificationRepository;
 
 import java.util.List;
 
@@ -20,9 +22,17 @@ public class ElecController {
     @Autowired
     ElecTravRepository elecTravRepository;
 
+    @Autowired
+    ElectrificationRepository electrificationRepository;
+
     @RequestMapping("/elec")
     public List<ElecSuivi> getAllElec() {
         return elecSuiviRepository.findAll();
+    }
+
+    @GetMapping("/electrification")
+    public List<Electrification> getAllElectrification(){
+        return electrificationRepository.findAll();
     }
 
     @GetMapping("/elec/{codeSite}")

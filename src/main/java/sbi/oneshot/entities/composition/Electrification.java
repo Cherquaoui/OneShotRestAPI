@@ -7,10 +7,12 @@ import lombok.Setter;
 import sbi.oneshot.entities.ElecTrav;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @Entity(name="elecsuivi")
 @Getter@Setter
 @NoArgsConstructor
+
 public class Electrification {
 
   @Id
@@ -31,4 +33,6 @@ public class Electrification {
   @OneToOne
   @PrimaryKeyJoinColumn
   private ElecTrav elecTrav;
+
+
 }

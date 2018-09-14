@@ -6,4 +6,6 @@ import sbi.oneshot.entities.composition.Electrification;
 
 
 public interface ElectrificationRepository extends JpaRepository<Electrification,String> {
+
+
 }
