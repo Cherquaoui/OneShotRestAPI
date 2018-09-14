@@ -29,7 +29,7 @@ public class OneShot {
   private Cw cw;
   @OneToOne
   @PrimaryKeyJoinColumn
-  private Electrification electrification;
+  private Electrification elec;
 
 
 

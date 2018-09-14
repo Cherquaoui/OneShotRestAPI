@@ -15,7 +15,7 @@ public class Electrification {
 
   @Id
   private String codeSite;
-  private String nDossier;
+  private String numDossier;
   private String elecEtat;
   private String regie;
   private java.sql.Date depotDemande;

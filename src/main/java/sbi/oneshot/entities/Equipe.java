@@ -24,9 +24,9 @@ public class Equipe implements Serializable {
     private String nom;
     private Integer cw;
     private Integer elec;
+    private Integer radio;
+    private Integer trans;
 
 
-    @OneToMany(mappedBy = "equipeCw",cascade =CascadeType.ALL)
-    private List<Cw> cwList;
 
 }

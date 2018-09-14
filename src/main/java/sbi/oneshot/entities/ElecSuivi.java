@@ -15,7 +15,7 @@ public class ElecSuivi {
   @Id
   private String codeSite;
   private String regie;
-  private String nDossier;
+  private String numDossier;
   private String elecEtat;
   private String elecCommentaires;
   private java.sql.Date depotDemande;

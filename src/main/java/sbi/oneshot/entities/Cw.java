@@ -1,8 +1,5 @@
 package sbi.oneshot.entities;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,12 +16,10 @@ public class Cw implements Serializable {
   private String codeSite;
   private String commentairesCw;
   private String etatCw;
-
-  @JsonIgnore
   @ManyToOne
   @JoinColumn(name = "equipe_Cw")
-
   private Equipe equipeCw;
+
   private java.sql.Date ouverture;
   private java.sql.Date fouilles;
   private java.sql.Date coulage;
