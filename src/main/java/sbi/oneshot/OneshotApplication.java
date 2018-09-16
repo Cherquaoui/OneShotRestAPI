@@ -10,11 +10,8 @@ import sbi.oneshot.service.AccountService;
 
 @SpringBootApplication
 
-public class OneshotApplication implements CommandLineRunner {
+public class OneshotApplication  {
 
-
-    @Autowired
-    private AccountService accountService;
 
 
     public static void main(String[] args) {
@@ -27,8 +24,5 @@ public class OneshotApplication implements CommandLineRunner {
     }
 
 
-    @Override
-    public void run(String... args) throws Exception {
 
-    }
 }
