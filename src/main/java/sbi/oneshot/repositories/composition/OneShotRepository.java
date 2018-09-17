@@ -27,4 +27,7 @@ public interface OneShotRepository extends PagingAndSortingRepository<OneShot,St
                                    @Param("equipeCw") String equipeCw,
                                    @Param("etatElec") String etatElec,
                                    Pageable pageable);
+
+    @Query("select oneshot from go oneshot where oneshot.cw.etatCw like %:etatCw%")
+    Page<OneShot> rechercheOneShot2(@Param("etatCw") String codeSite,Pageable pageable);
 }

@@ -60,6 +60,10 @@ public class OneShotController {
                 ,etatCw,equipeCw,etatElec,PageRequest.of(page,size,sort));
     }
 
+    @RequestMapping("/oneshot2")
+    public Page<OneShot> getOS(@RequestParam(name = "etatCw",defaultValue = "") String etatCw,Sort sort){
+        return oneShotRepository.rechercheOneShot2(etatCw,PageRequest.of(0,10,sort)); }
+
 
 
 
