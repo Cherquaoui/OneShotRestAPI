@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter@Setter
@@ -16,7 +17,8 @@ public class ElecSuivi {
   private String codeSite;
   private String regie;
   private String numDossier;
-  private String elecEtat;
+  @NotNull
+  private String elecEtat="00-Att demande_encours";
   private String elecCommentaires;
   private java.sql.Date depotDemande;
   private java.sql.Date etude;

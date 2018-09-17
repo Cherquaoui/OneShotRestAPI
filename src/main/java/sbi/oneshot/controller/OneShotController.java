@@ -1,5 +1,4 @@
 package sbi.oneshot.controller;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -9,11 +8,7 @@ import sbi.oneshot.entities.*;
 import sbi.oneshot.entities.composition.OneShot;
 import sbi.oneshot.repositories.*;
 import sbi.oneshot.repositories.composition.OneShotRepository;
-import sbi.oneshot.service.AjouterGo;
-
 import java.util.List;
-import java.util.Optional;
-
 
 @RestController
 @CrossOrigin("*")
@@ -28,21 +23,12 @@ public class OneShotController {
     @Autowired
     private EquipeRepository equipeRepository;
 
-
-
-
-
-
     @GetMapping("/codesite")
     public String[] rechercherGo(@RequestParam(name = "codeSite", defaultValue = "") String codeSite,
                                  @RequestParam(name = "region", defaultValue = "") String region,
                                  @RequestParam(name = "typologie", defaultValue = "") String typologie) {
-
         return goRepository.rechercherGo(codeSite, region, typologie);
     }
-
-
-
 
     @RequestMapping("/oneshot")
     public Page<OneShot> rechercheOneShot(@RequestParam(name = "page", defaultValue = "0") int page,
@@ -55,24 +41,13 @@ public class OneShotController {
                                           @RequestParam(name = "etatElec", defaultValue = "") String etatElec,
                                           Sort sort
     ) {
-
         return oneShotRepository.rechercheOneShot(codeSite,region,typologie
                 ,etatCw,equipeCw,etatElec,PageRequest.of(page,size,sort));
     }
-
-    @RequestMapping("/oneshot2")
-    public Page<OneShot> getOS(@RequestParam(name = "etatCw",defaultValue = "") String etatCw,Sort sort){
-        return oneShotRepository.rechercheOneShot2(etatCw,PageRequest.of(0,10,sort)); }
-
-
-
-
-
 
     @GetMapping("/equipe")
     public List<Equipe> getEquipe(){
         return equipeRepository.findAll();
     }
-
 
 }

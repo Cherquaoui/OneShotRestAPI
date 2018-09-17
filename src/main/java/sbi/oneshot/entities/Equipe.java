@@ -27,6 +27,12 @@ public class Equipe implements Serializable {
     private Integer radio;
     private Integer trans;
 
+    public Equipe(int id){
+        this.id = id;
+    }
+
+
+
 
 
 }

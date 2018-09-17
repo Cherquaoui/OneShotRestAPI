@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.hateoas.ResourceSupport;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 
@@ -22,8 +23,10 @@ public class Go implements Serializable {
   private Double latitude;
   private java.sql.Date dateGo;
   private Double longitude;
-  private String region;
-  private String typologie;
+  @NotNull
+  private String region="";
+  @NotNull
+  private String typologie="";
   private Long hauteur;
 
   public Go(String codeSite){

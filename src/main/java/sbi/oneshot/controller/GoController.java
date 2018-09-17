@@ -1,5 +1,4 @@
 package sbi.oneshot.controller;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -8,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import sbi.oneshot.entities.Go;
 import sbi.oneshot.repositories.GoRepository;
 import sbi.oneshot.service.AjouterGo;
-
 import java.util.Optional;
 
 @RestController
@@ -33,29 +31,21 @@ public class GoController {
                                 @RequestParam(name = "region", defaultValue = "") String region,
                                 @RequestParam(name = "typologie", defaultValue = "") String typologie,
                                 Sort sort) {
-
         return goRepository.rechercher(mc, typologie, region, PageRequest.of(page, size,sort));
-
     }
-
 
     @PutMapping("/go/{codeSite}")
     public Go editGo( @RequestBody Go go) {
         return goRepository.save(go);
-
     }
 
     @PostMapping(value = "/go")
-
     public Optional<Go> saveGo(@RequestBody Optional<Go> go) {
-
         Optional<Go> monGo = goRepository.findById(go.get().getCodeSite());
         if (!monGo.isPresent()) {
             ajouterGo.saveGo(go.get());
-
             return go;
         }
-
         return null;
     }
 
