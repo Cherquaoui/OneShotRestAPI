@@ -39,8 +39,8 @@ public class OneShotController {
                                           @RequestParam(name = "etatCw", defaultValue = "") String etatCw,
                                           @RequestParam(name = "equipeCw", defaultValue = "") String equipeCw,
                                           @RequestParam(name = "etatElec", defaultValue = "") String etatElec,
-                                          Sort sort
-    ) {
+                                          Sort sort)
+    {
         return oneShotRepository.rechercheOneShot(codeSite,region,typologie
                 ,etatCw,equipeCw,etatElec,PageRequest.of(page,size,sort));
     }

@@ -20,6 +20,7 @@ public class Electrification {
   private String numDossier;
   private String elecEtat;
   private String regie;
+  private String elecCommentaires;
   private java.sql.Date depotDemande;
   private java.sql.Date etude;
   private java.sql.Date devis;

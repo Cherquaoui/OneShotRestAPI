@@ -17,9 +17,7 @@ import java.io.Serializable;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Cw implements Serializable {
 
-  @Transient
-  @Autowired
-  private EquipeRepository equipeRepository;
+
 
 
 
