@@ -9,6 +9,7 @@ import sbi.oneshot.entities.composition.OneShot;
 import sbi.oneshot.repositories.*;
 import sbi.oneshot.repositories.composition.OneShotRepository;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin("*")
@@ -48,6 +49,11 @@ public class OneShotController {
     @GetMapping("/equipe")
     public List<Equipe> getEquipe(){
         return equipeRepository.findAll();
+    }
+
+    @GetMapping("/oneshot/{codeSite}")
+    public Optional<OneShot> getOneShotByCodeSite(@PathVariable String codeSite){
+        return oneShotRepository.findById(codeSite);
     }
 
 }
